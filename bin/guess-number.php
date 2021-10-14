@@ -8,5 +8,6 @@ if (file_exists($autoloadPathForGithub)) {
 } else {
     require_once($autoloadPathForPackagist);
 }
-    use function danilkot45\guessNumber\Controller\key;
-key();
+    use function danilkot45\guessNumber\Controller\startGame;
+
+    startGame();
