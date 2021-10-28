@@ -2,15 +2,11 @@
 
 namespace danilkot45\guessNumber\Model;
 
-use function danilkot45\guessNumber\View\greeting;
 use function danilkot45\guessNumber\View\endGame;
 use function danilkot45\guessNumber\View\MenuGame;
 use function danilkot45\guessNumber\DataBase\insertNewGame;
 use function danilkot45\guessNumber\DataBase\addAttemptInDB;
-use function danilkot45\guessNumber\DataBase\outputListGame;
 use function danilkot45\guessNumber\DataBase\updateInfoGame;
-use function danilkot45\guessNumber\DataBase\outputListGameTop;
-use function danilkot45\guessNumber\DataBase\checkGameid;
 
 function setting()
 {
@@ -75,43 +71,5 @@ function replayGame($user_name)
         MenuGame();
     } else {
         replayGame($user_name);
-    }
-}
-
-function commandHandler($getCommand)
-{
-    $checkCommand = false;
-
-    while ($checkCommand === false) {
-        if ($getCommand === "--new") {
-            greeting();
-
-            $checkCommand = true;
-        } elseif ($getCommand === "--list") {
-            outputListGame();
-        } elseif ($getCommand === "--list win") {
-            outputListGame("win");
-        } elseif ($getCommand === "--list loose") {
-            outputListGame("loss");
-        } elseif ($getCommand === "--top") {
-            outputListGameTop();
-        } elseif (preg_match('/(^--replay [0-9]+$)/', $getCommand) != 0) {
-            $temp = explode(' ', $getCommand);
-            $id = $temp[1];
-
-            unset($temp);
-
-            $checkId = checkGameid($id);
-
-            if ($checkId) {
-                showGame($checkId);
-            } else {
-                echo "Такой игры не существует" . PHP_EOL;
-            }
-        } elseif ($getCommand === "--exit") {
-            exit;
-        }
-
-        $getCommand = \cli\prompt("Введите ключ");
     }
 }

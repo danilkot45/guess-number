@@ -10,4 +10,4 @@ if (file_exists($autoloadPathForGithub)) {
 }
     use function danilkot45\guessNumber\Controller\startGame;
 
-    startGame();
+    startGame($argv);
